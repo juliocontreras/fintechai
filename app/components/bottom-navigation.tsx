@@ -69,7 +69,8 @@ export function BottomNavigation({ activeSection, onSectionChange, onMenuClick, 
 
   return (
     <div ref={navRef} className="fixed bottom-4 left-0 right-0 h-20 flex items-center justify-center font-sans z-50">
-      <div className="relative w-[90%] h-full">
+      {/* Se han añadido las clases 'md:w-1/2 md:mx-auto' y 'lg:w-[25%] lg:mx-auto' para el ancho y centrado responsivo */}
+      <div className="relative w-[90%] md:w-1/2 lg:w-1/4 h-full md:mx-auto lg:mx-auto">
         <NotchedBackground />
         <div 
           className={`absolute left-1/2 -translate-x-1/2 top-[-28px] transition-transform duration-500 ease-in-out ${
