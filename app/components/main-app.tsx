@@ -42,7 +42,7 @@ export function MainApp() {
 
   return (
     // Se ha actualizado el estilo para que la altura sea del 110% de la pantalla
-    <div className="flex h-[110vh]" style={{ background: 'linear-gradient(to top right, #000000 0%, #1e3f4e 100%)' }}>
+    <div className="flex pt-4 h-[110vh]" style={{ background: 'linear-gradient(to top right, #000000 0%, #1e3f4e 100%)' }}>
       {/* Custom Sidebar */}
       <CustomSidebar 
         activeSection={activeSection}
@@ -92,18 +92,27 @@ export function MainApp() {
           </div>
         </header>
 
-        {/* Content */}
+        {/* Contenido principal con ancho responsive */}
         <main className="flex-1 overflow-auto p-4 pb-24">
-          {renderActiveSection()}
+          <div className="w-4/5 md:w-1/2 lg:w-[45%] mx-auto">
+            {renderActiveSection()}
+          </div>
         </main>
       </div>
 
       {/* Bottom Navigation */}
+      {/* He añadido las clases 'w-full sm:w-3/5 md:w-full mx-auto' para controlar el ancho y centrar el componente.
+          w-full (ancho completo) por defecto en móviles.
+          sm:w-3/5 (60% de ancho) para pantallas >= 640px.
+          md:w-full (ancho completo) para pantallas >= 768px, sobrescribiendo la clase 'sm:w-3/5'.
+          mx-auto centra el componente.
+      */}
       <BottomNavigation 
         activeSection={activeSection}
         onSectionChange={setActiveSection}
         onMenuClick={toggleSidebar}
         isSidebarOpen={isSidebarOpen}
+        className="w-full sm:w-3/5 md:w-full mx-auto"
       />
 
       {/* Overlay for mobile when sidebar is open */}

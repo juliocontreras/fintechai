@@ -49,9 +49,11 @@ const menuItems = [
 
 export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) {
   return (
-    // Se ha agregado el fondo degradado para que coincida con la aplicación principal
+    // Se han actualizado las clases para reducir el ancho del menú lateral en un 15%.
+    // En pantallas pequeñas (hasta 767px), el ancho es 3.4vw.
+    // En pantallas 'md' y superiores (768px o más), el ancho es 204px.
     <div 
-      className="w-60 md:w-60 max-md:w-[10vw] max-md:min-w-[10vw] max-md:max-w-[10vw]"
+      className="w-[3.4vw] md:w-[204px]"
       style={{ background: 'linear-gradient(to top right, #000000 0%, #1e3f4e 100%)' }}
     >
       <Sidebar className="w-full h-full bg-transparent">

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: ["https://fintechai.vercel.app/icon-192x192.png"],
   },
-    generator: 'v0.dev'
+    generator: 'Julio'
 };
 
 export default function RootLayout({

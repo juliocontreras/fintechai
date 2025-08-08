@@ -7,20 +7,19 @@ import { TrendingUp, TrendingDown, DollarSign, CreditCard } from "lucide-react"
 
 export function Dashboard() {
   return (
-    // Se han añadido las clases 'md:w-[45%]' para un ancho del 45%
-    // y 'md:mx-auto' para centrar el contenido en pantallas medianas y grandes.
-    // También he incluido un contenedor flex para centrar verticalmente, solo para fines de demostración.
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4">
-      <div className="space-y-6 w-full md:w-[45%] md:mx-auto">
-        {/* Sección de balance */}
+    // Se ha eliminado el 'min-h-screen' y el 'items-center' para que el contenido comience en la parte superior.
+    <div className="flex justify-center text-white p-4">
+      {/* The md:w-[45%] class has been removed to make the dashboard 100% width. */}
+      <div className="space-y-6 w-full md:mx-auto">
+        {/* Balance section */}
         <div className="mb-6 text-center">
           <p className="text-xl font-medium text-gray-400 mb-2">Patrimonio</p>
           <h1 className="text-4xl font-bold text-cyan-300">$32,440.00</h1>
         </div>
 
-        {/* Botones de acción con formato cuadrado perfecto y color de fondo */}
+        {/* Action buttons with perfect square format and background color */}
         <div className="grid grid-cols-4 gap-4 text-center mb-8">
-          {/* Botón de Payment */}
+          {/* Payment Button */}
           <div className="flex flex-col items-center">
             <button className="bg-[#1e5c70] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -29,7 +28,7 @@ export function Dashboard() {
             </button>
             <span className="mt-2 text-sm text-gray-400">Payment</span>
           </div>
-          {/* Botón de Receive */}
+          {/* Receive Button */}
           <div className="flex flex-col items-center">
             <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +37,7 @@ export function Dashboard() {
             </button>
             <span className="mt-2 text-sm text-gray-400">Receive</span>
           </div>
-          {/* Botón de Top Up */}
+          {/* Top Up Button */}
           <div className="flex flex-col items-center">
             <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +46,7 @@ export function Dashboard() {
             </button>
             <span className="mt-2 text-sm text-gray-400">Top Up</span>
           </div>
-          {/* Botón de Transfer */}
+          {/* Transfer Button */}
           <div className="flex flex-col items-center">
             <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +57,7 @@ export function Dashboard() {
           </div>
         </div>
 
-        {/* Botón para añadir tarjeta */}
+        {/* Add Card Button */}
         <div className="mb-6 flex justify-center">
           <button className="bg-gray-800 text-gray-400 hover:text-white border border-dashed border-gray-700 p-4 rounded-xl w-full flex items-center justify-center transition-colors duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,14 +67,14 @@ export function Dashboard() {
           </button>
         </div>
 
-        {/* Historial de transacciones */}
+        {/* Transaction History */}
         <div className="space-y-4">
           <div className="flex justify-between items-center text-gray-400">
             <span className="font-semibold text-gray-200">Transaction History</span>
             <a href="#" className="text-sm text-cyan-300 hover:underline">See All</a>
           </div>
 
-          {/* Ejemplo de tarjeta de transacción 1 */}
+          {/* Transaction Card Example 1 */}
           <div className="bg-[#20333b] p-4 rounded-xl flex justify-between items-center">
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,7 +92,7 @@ export function Dashboard() {
             </button>
           </div>
           
-          {/* Ejemplo de tarjeta de transacción 2 */}
+          {/* Transaction Card Example 2 */}
           <div className="bg-[#20333b] p-4 rounded-xl flex justify-between items-center">
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

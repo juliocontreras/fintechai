@@ -6,8 +6,8 @@ import { LayoutDashboard, Settings, Menu, X } from 'lucide-react'
 interface BottomNavigationProps {
   activeSection: string
   onSectionChange: (section: string) => void
-  onMenuClick: () => void // Add this prop to control sidebar
-  isSidebarOpen: boolean // Add this prop to track sidebar state
+  onMenuClick: () => void
+  isSidebarOpen: boolean
 }
 
 const navItems = [
@@ -69,7 +69,6 @@ export function BottomNavigation({ activeSection, onSectionChange, onMenuClick, 
 
   return (
     <div ref={navRef} className="fixed bottom-4 left-0 right-0 h-20 flex items-center justify-center font-sans z-50">
-      {/* Se han añadido las clases 'md:w-1/2 md:mx-auto' y 'lg:w-[25%] lg:mx-auto' para el ancho y centrado responsivo */}
       <div className="relative w-[90%] md:w-1/2 lg:w-1/4 h-full md:mx-auto lg:mx-auto">
         <NotchedBackground />
         <div 

@@ -122,3 +122,16 @@ a {
     font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
 }
+
+/* Tablets 767px a 643px optimizations */
+@BottomNavigation @media (min-width: 643px) and (max-width:867px) {
+  body {
+    font-size: 14px;
+   width: 30%;
+  }
+   
+  
+
+  
+}
+
