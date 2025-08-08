@@ -94,7 +94,7 @@ export function MainApp() {
 
         {/* Contenido principal con ancho responsive */}
         <main className="flex-1 overflow-auto p-4 pb-24">
-          <div className="w-4/5 md:w-1/2 lg:w-[45%] mx-auto">
+          <div className="w-5/5 md:w-1/2 lg:w-[45%] mx-auto">
             {renderActiveSection()}
           </div>
         </main>
@@ -112,7 +112,7 @@ export function MainApp() {
         onSectionChange={setActiveSection}
         onMenuClick={toggleSidebar}
         isSidebarOpen={isSidebarOpen}
-        className="w-full sm:w-3/5 md:w-full mx-auto"
+        
       />
 
       {/* Overlay for mobile when sidebar is open */}

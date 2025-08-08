@@ -1046,6 +1046,9 @@ video {
 .w-px {
   width: 1px;
 }
+.w-3\/5 {
+  width: 60%;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -3419,6 +3422,18 @@ a {
 
   .lg\:w-\[45\%\] {
     width: 45%;
+  }
+
+  .lg\:w-\[75\%\] {
+    width: 75%;
+  }
+
+  .lg\:w-\[85\%\] {
+    width: 85%;
+  }
+
+  .lg\:w-\[95\%\] {
+    width: 95%;
   }
 }
 .\[\&\:first-child\[data-selected\=true\]_button\]\:rounded-l-md:first-child[data-selected=true] button {
