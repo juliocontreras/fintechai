@@ -978,9 +978,6 @@ video {
 .w-4 {
   width: 1rem;
 }
-.w-4\/5 {
-  width: 80%;
-}
 .w-5 {
   width: 1.25rem;
 }
@@ -1045,9 +1042,6 @@ video {
 }
 .w-px {
   width: 1px;
-}
-.w-3\/5 {
-  width: 60%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -2331,6 +2325,33 @@ a {
 
   
 }
+
+
+
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* El contenedor principal que Next.js usa */
+#__next, .main-container { /* Usa la clase o ID de tu contenedor principal */
+  /* El gradiente que quieres aplicar */
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  
+  /* Asegura que ocupe toda la altura y anchura */
+  min-height: 100vh; /* Usa 100vh para ocupar toda la altura visible */
+  width: 100%;
+
+  /* --- ¡LA PARTE MÁS IMPORTANTE! --- */
+  /* Añade padding para respetar las áreas seguras del dispositivo (notch, etc.) */
+  /* Esto evita que tu contenido se oculte debajo de la barra de estado o de gestos */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
 .file\:border-0::file-selector-button {
   border-width: 0px;
 }
@@ -3423,18 +3444,6 @@ a {
   .lg\:w-\[45\%\] {
     width: 45%;
   }
-
-  .lg\:w-\[75\%\] {
-    width: 75%;
-  }
-
-  .lg\:w-\[85\%\] {
-    width: 85%;
-  }
-
-  .lg\:w-\[95\%\] {
-    width: 95%;
-  }
 }
 .\[\&\:first-child\[data-selected\=true\]_button\]\:rounded-l-md:first-child[data-selected=true] button {
   border-top-left-radius: calc(var(--radius) - 2px);
@@ -3670,5 +3679,6 @@ a {
 [data-slot=popover-content] .\[\[data-slot\=popover-content\]_\&\]\:bg-transparent {
   background-color: transparent;
 }
+
 
 

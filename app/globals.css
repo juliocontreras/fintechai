@@ -135,3 +135,31 @@ a {
   
 }
 
+
+
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* El contenedor principal que Next.js usa */
+#__next, .main-container { /* Usa la clase o ID de tu contenedor principal */
+  /* El gradiente que quieres aplicar */
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  
+  /* Asegura que ocupe toda la altura y anchura */
+  min-height: 100vh; /* Usa 100vh para ocupar toda la altura visible */
+  width: 100%;
+
+  /* --- ¡LA PARTE MÁS IMPORTANTE! --- */
+  /* Añade padding para respetar las áreas seguras del dispositivo (notch, etc.) */
+  /* Esto evita que tu contenido se oculte debajo de la barra de estado o de gestos */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+
