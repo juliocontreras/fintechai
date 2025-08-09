@@ -254,6 +254,7 @@ const InteractiveParticleCanvas = () => {
         };
 
         const animate = () => {
+            if (!canvas) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
@@ -285,7 +286,7 @@ const InteractiveParticleCanvas = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />;
+    return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full -z-10" />;
 };
 
 
@@ -294,7 +295,17 @@ export function AuthScreen() {
   const { login } = useAuth()
 
   useEffect(() => {
-    // Bloquear zoom y scroll en móvil
+    // --- INICIO: CÓDIGO ACTUALIZADO PARA BLOQUEAR SCROLL ---
+    
+    // Guardar los estilos originales para poder restaurarlos después
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
+    // Bloquear el scroll en `body` y `html` para máxima compatibilidad en navegadores
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    // El código para el viewport que ya tenías es correcto para evitar el zoom en móviles
     const meta = document.querySelector('meta[name="viewport"]');
     let originalContent = '';
     if (meta) {
@@ -302,8 +313,8 @@ export function AuthScreen() {
         meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
     }
 
-    document.body.style.overflow = 'hidden';
-
+    // Este manejador de focusout es una buena práctica para la experiencia en móviles,
+    // especialmente cuando aparece el teclado virtual.
     const handleFocusOut = (event: FocusEvent) => {
         const target = event.target as HTMLElement;
         if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
@@ -312,17 +323,22 @@ export function AuthScreen() {
             }, 100);
         }
     };
-
     document.addEventListener('focusout', handleFocusOut);
 
+    // Función de limpieza para restaurar los estilos y eventos originales cuando el componente se desmonte
     return () => {
         if (meta) {
             meta.setAttribute('content', originalContent);
         }
-        document.body.style.overflow = 'auto';
+        // Restaurar los estilos de overflow originales
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+
+        // Limpiar el event listener
         document.removeEventListener('focusout', handleFocusOut);
     }
-  }, []);
+    // --- FIN: CÓDIGO ACTUALIZADO ---
+  }, []); // El array vacío asegura que este efecto se ejecute solo una vez
 
   const handleAnonymousLogin = async () => {
     setLoading(true)
@@ -360,7 +376,6 @@ export function AuthScreen() {
       
       <InteractiveParticleCanvas />
 
-      {/* El overlay se ha eliminado para mostrar el gradiente directamente */}
       <div className="w-full max-w-xs mx-auto relative z-10">
         {/* Header: Logo y Título */}
         <div className="flex flex-col items-center space-y-4 mb-10">
