@@ -4,8 +4,9 @@
   "description": "Tu asistente personal para el control financiero",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1A2E35",
-  "theme_color": "#000000",
+  "background_color":  "#152C37",
+
+  "theme_color": "#152C37",
   "icons": [
     {
       "src": "/icon-192x192.png",

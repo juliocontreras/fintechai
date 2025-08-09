@@ -42,7 +42,7 @@ export function MainApp() {
 
   return (
     // Se ha actualizado el estilo para que la altura sea del 110% de la pantalla
-    <div className="flex pt-4 h-[110vh]" style={{ background: 'linear-gradient(to top right, #000000 0%, #1e3f4e 100%)' }}>
+    <div className="flex pt-4 h-[110vh]" style={{ background: 'linear-gradient(to bottom, #152C37, #0C181E)' }}>
       {/* Custom Sidebar */}
       <CustomSidebar 
         activeSection={activeSection}

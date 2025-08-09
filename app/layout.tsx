@@ -7,8 +7,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 // 1. Exporta el objeto 'viewport' para configurar el theme-color
 export const viewport = {
-  themeColor: '#162E39', // Cambia este color al de tu gradiente
+  themeColor: '#152C37', // Cambia este color al de tu gradiente
 }
+
 
 export const metadata: Metadata = {
   title: "Personal Finance App",
