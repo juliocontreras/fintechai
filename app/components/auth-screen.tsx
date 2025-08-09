@@ -286,7 +286,10 @@ const InteractiveParticleCanvas = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full -z-10" />;
+    // --- INICIO: CÓDIGO CORREGIDO ---
+    // Se eliminó la clase "-z-10" que ocultaba el canvas.
+    return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />;
+    // --- FIN: CÓDIGO CORREGIDO ---
 };
 
 
@@ -295,8 +298,6 @@ export function AuthScreen() {
   const { login } = useAuth()
 
   useEffect(() => {
-    // --- INICIO: CÓDIGO ACTUALIZADO PARA BLOQUEAR SCROLL ---
-    
     // Guardar los estilos originales para poder restaurarlos después
     const originalBodyOverflow = document.body.style.overflow;
     const originalHtmlOverflow = document.documentElement.style.overflow;
@@ -337,7 +338,6 @@ export function AuthScreen() {
         // Limpiar el event listener
         document.removeEventListener('focusout', handleFocusOut);
     }
-    // --- FIN: CÓDIGO ACTUALIZADO ---
   }, []); // El array vacío asegura que este efecto se ejecute solo una vez
 
   const handleAnonymousLogin = async () => {
