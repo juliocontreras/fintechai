@@ -20,53 +20,60 @@ export function Settings() {
     setIsLoggingOut(true)
     try {
       await logout()
-      // The AuthProvider will handle the state change and redirect
+      // El AuthProvider se encargará del cambio de estado y la redirección
     } catch (error) {
-      console.error("Error logging out:", error)
+      console.error("Error al cerrar sesión:", error)
     } finally {
       setIsLoggingOut(false)
     }
   }
 
+  // Clases de estilo para reutilizar
+  const cardClasses = "bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-700/50"
+  const labelClasses = "text-gray-300"
+  const descriptionClasses = "text-gray-400"
+  const inputClasses = "bg-slate-900/70 border-slate-700 text-white placeholder:text-gray-500 rounded-md"
+  const selectTriggerClasses = "bg-slate-900/70 border-slate-700 text-white rounded-md"
+  const separatorClasses = "bg-slate-700"
+
   return (
-    <div className="space-y-6 p-4 md:p-8 relative">
-      <div className="absolute inset-0 z-[-1] bg-gradient-to-br from-indigo-500 to-purple-600 animate-gradient-xy"></div>
+    <div className="space-y-8 p-4 md:p-8">
       <div>
-        <h2 className="text-2xl font-bold text-white">Configuración</h2>
-        <p className="text-gray-200">Personaliza tu experiencia en la aplicación</p>
+        <h2 className="text-3xl font-bold text-white">Configuración</h2>
+        <p className={descriptionClasses}>Personaliza tu experiencia en la aplicación</p>
       </div>
 
       {/* Profile Settings */}
-      <Card className="bg-black/40 backdrop-blur-md rounded-2xl shadow-xl border-none">
+      <Card className={cardClasses}>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <User className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-3 text-white">
+            <User className="h-6 w-6" />
             Perfil de Usuario
           </CardTitle>
-          <CardDescription className="text-gray-300">Actualiza tu información personal y preferencias de cuenta</CardDescription>
+          <CardDescription className={descriptionClasses}>Actualiza tu información personal y preferencias de cuenta</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
+        <CardContent className="space-y-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="firstName" className="text-white">Nombre</Label>
-              <Input id="firstName" placeholder="Tu nombre" defaultValue="Usuario" />
+              <Label htmlFor="firstName" className={labelClasses}>Nombre</Label>
+              <Input id="firstName" placeholder="Tu nombre" defaultValue="Usuario" className={inputClasses} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="lastName" className="text-white">Apellido</Label>
-              <Input id="lastName" placeholder="Tu apellido" defaultValue="Demo" />
+              <Label htmlFor="lastName" className={labelClasses}>Apellido</Label>
+              <Input id="lastName" placeholder="Tu apellido" defaultValue="Demo" className={inputClasses} />
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-white">Correo Electrónico</Label>
-            <Input id="email" type="email" placeholder="tu@email.com" defaultValue="usuario@email.com" />
+            <Label htmlFor="email" className={labelClasses}>Correo Electrónico</Label>
+            <Input id="email" type="email" placeholder="tu@email.com" defaultValue="usuario@email.com" className={inputClasses} />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="currency" className="text-white">Moneda Principal</Label>
+            <Label htmlFor="currency" className={labelClasses}>Moneda Principal</Label>
             <Select defaultValue="usd">
-              <SelectTrigger>
+              <SelectTrigger className={selectTriggerClasses}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-slate-800 border-slate-700 text-white">
                 <SelectItem value="usd">USD - Dólar Estadounidense</SelectItem>
                 <SelectItem value="eur">EUR - Euro</SelectItem>
                 <SelectItem value="mxn">MXN - Peso Mexicano</SelectItem>
@@ -74,35 +81,35 @@ export function Settings() {
               </SelectContent>
             </Select>
           </div>
-          <Button>Guardar Cambios</Button>
+          <Button className="w-full md:w-auto">Guardar Cambios</Button>
         </CardContent>
       </Card>
 
       {/* Appearance Settings */}
-      <Card className="bg-black/40 backdrop-blur-md rounded-2xl shadow-xl border-none">
+      <Card className={cardClasses}>
         <CardHeader>
           <CardTitle className="text-white">Apariencia</CardTitle>
-          <CardDescription className="text-gray-300">Personaliza la apariencia de la aplicación</CardDescription>
+          <CardDescription className={descriptionClasses}>Personaliza la apariencia de la aplicación</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label className="text-white">Tema</Label>
-              <p className="text-sm text-gray-300">Selecciona el tema de la aplicación</p>
+              <Label className={labelClasses}>Tema</Label>
+              <p className="text-sm text-gray-400">Selecciona el tema de la aplicación</p>
             </div>
             <ThemeToggle />
           </div>
-          <Separator className="bg-white/20" />
+          <Separator className={separatorClasses} />
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label className="text-white">Formato de Fecha</Label>
-              <p className="text-sm text-gray-300">Cómo se muestran las fechas</p>
+              <Label className={labelClasses}>Formato de Fecha</Label>
+              <p className="text-sm text-gray-400">Cómo se muestran las fechas</p>
             </div>
             <Select defaultValue="dd/mm/yyyy">
-              <SelectTrigger className="w-[150px]">
+              <SelectTrigger className={`w-[180px] ${selectTriggerClasses}`}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-slate-800 border-slate-700 text-white">
                 <SelectItem value="dd/mm/yyyy">DD/MM/YYYY</SelectItem>
                 <SelectItem value="mm/dd/yyyy">MM/DD/YYYY</SelectItem>
                 <SelectItem value="yyyy-mm-dd">YYYY-MM-DD</SelectItem>
@@ -113,148 +120,108 @@ export function Settings() {
       </Card>
 
       {/* Notification Settings */}
-      <Card className="bg-black/40 backdrop-blur-md rounded-2xl shadow-xl border-none">
+      <Card className={cardClasses}>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Bell className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-3 text-white">
+            <Bell className="h-6 w-6" />
             Notificaciones
           </CardTitle>
-          <CardDescription className="text-gray-300">Configura cómo y cuándo recibir notificaciones</CardDescription>
+          <CardDescription className={descriptionClasses}>Configura cómo y cuándo recibir notificaciones</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label className="text-white">Alertas de Presupuesto</Label>
-              <p className="text-sm text-gray-300">
+              <Label className={labelClasses}>Alertas de Presupuesto</Label>
+              <p className="text-sm text-gray-400">
                 Recibe alertas cuando te acerques al límite de tu presupuesto
               </p>
             </div>
             <Switch defaultChecked />
           </div>
-          <Separator className="bg-white/20" />
+          <Separator className={separatorClasses} />
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label className="text-white">Recordatorios de Transacciones</Label>
-              <p className="text-sm text-gray-300">Recordatorios para registrar transacciones pendientes</p>
+              <Label className={labelClasses}>Recordatorios de Transacciones</Label>
+              <p className="text-sm text-gray-400">Recordatorios para registrar transacciones pendientes</p>
             </div>
             <Switch defaultChecked />
           </div>
-          <Separator className="bg-white/20" />
+          <Separator className={separatorClasses} />
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label className="text-white">Reportes Mensuales</Label>
-              <p className="text-sm text-gray-300">Recibe un resumen mensual de tus finanzas</p>
+              <Label className={labelClasses}>Reportes Mensuales</Label>
+              <p className="text-sm text-gray-400">Recibe un resumen mensual de tus finanzas</p>
             </div>
             <Switch />
           </div>
         </CardContent>
       </Card>
 
-      {/* Security Settings */}
-      <Card className="bg-black/40 backdrop-blur-md rounded-2xl shadow-xl border-none">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Shield className="h-5 w-5" />
-            Seguridad
-          </CardTitle>
-          <CardDescription className="text-gray-300">Mantén tu cuenta segura</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label className="text-white">Cambiar Contraseña</Label>
+      {/* Security & Data Management */}
+      <div className="grid md:grid-cols-2 gap-8">
+        <Card className={cardClasses}>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3 text-white">
+              <Shield className="h-6 w-6" />
+              Seguridad
+            </CardTitle>
+            <CardDescription className={descriptionClasses}>Mantén tu cuenta segura</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Input type="password" placeholder="Contraseña actual" />
-              <Input type="password" placeholder="Nueva contraseña" />
-              <Input type="password" placeholder="Confirmar nueva contraseña" />
+              <Label className={labelClasses}>Cambiar Contraseña</Label>
+              <div className="space-y-2">
+                <Input type="password" placeholder="Contraseña actual" className={inputClasses} />
+                <Input type="password" placeholder="Nueva contraseña" className={inputClasses} />
+                <Input type="password" placeholder="Confirmar nueva contraseña" className={inputClasses} />
+              </div>
+              <Button variant="outline" className="w-full">Actualizar Contraseña</Button>
             </div>
-            <Button variant="outline">Actualizar Contraseña</Button>
-          </div>
-          <Separator className="bg-white/20" />
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label className="text-white">Autenticación de Dos Factores</Label>
-              <p className="text-sm text-gray-300">Agrega una capa extra de seguridad a tu cuenta</p>
+            <Separator className={separatorClasses} />
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className={labelClasses}>Autenticación de Dos Factores</Label>
+              </div>
+              <Button variant="outline">Activar</Button>
             </div>
-            <Button variant="outline">Configurar</Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* Data Management */}
-      <Card className="bg-black/40 backdrop-blur-md rounded-2xl shadow-xl border-none">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <CreditCard className="h-5 w-5" />
-            Gestión de Datos
-          </CardTitle>
-          <CardDescription className="text-gray-300">Administra tus datos financieros</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label className="text-white">Exportar Datos</Label>
-              <p className="text-sm text-gray-300">Descarga todos tus datos financieros</p>
+        <Card className={cardClasses}>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3 text-white">
+              <CreditCard className="h-6 w-6" />
+              Gestión de Cuenta
+            </CardTitle>
+            <CardDescription className={descriptionClasses}>Administra tus datos y sesión</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Label className={labelClasses}>Exportar Datos</Label>
+              <Button variant="outline">
+                <Download className="h-4 w-4 mr-2" />
+                Exportar
+              </Button>
             </div>
-            <Button variant="outline">
-              <Download className="h-4 w-4 mr-2" />
-              Exportar
-            </Button>
-          </div>
-          <Separator className="bg-white/20" />
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label className="text-white">Eliminar Cuenta</Label>
-              <p className="text-sm text-gray-300">Elimina permanentemente tu cuenta y todos los datos</p>
+            <Separator className={separatorClasses} />
+            <div className="flex items-center justify-between">
+              <Label className={labelClasses}>Cerrar Sesión</Label>
+              <Button variant="secondary" onClick={handleLogout} disabled={isLoggingOut}>
+                <LogOut className="h-4 w-4 mr-2" />
+                {isLoggingOut ? "Cerrando..." : "Cerrar Sesión"}
+              </Button>
             </div>
-            <Button variant="destructive">
-              <Trash2 className="h-4 w-4 mr-2" />
-              Eliminar
-            </Button>
-          </div>
-          <Separator className="bg-white/20" />
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label className="text-white">Cerrar Sesión</Label>
-              <p className="text-sm text-gray-300">Cierra tu sesión en la aplicación</p>
+            <Separator className={separatorClasses} />
+            <div className="flex items-center justify-between">
+              <Label className={`${labelClasses} text-red-500`}>Eliminar Cuenta</Label>
+              <Button variant="destructive">
+                <Trash2 className="h-4 w-4 mr-2" />
+                Eliminar
+              </Button>
             </div>
-            <Button variant="secondary" onClick={handleLogout} disabled={isLoggingOut}>
-              <LogOut className="h-4 w-4 mr-2" />
-              {isLoggingOut ? "Cerrando..." : "Cerrar Sesión"}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* App Information */}
-      <Card className="bg-black/40 backdrop-blur-md rounded-2xl shadow-xl border-none">
-        <CardHeader>
-          <CardTitle className="text-white">Información de la Aplicación</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="flex justify-between text-sm text-white">
-            <span>Versión:</span>
-            <span>23.0.0</span>
-          </div>
-          <div className="flex justify-between text-sm text-white">
-            <span>Última actualización:</span>
-            <span>15 de Enero, 2024</span>
-          </div>
-          <div className="flex justify-between text-sm text-white">
-            <span>Soporte:</span>
-            <span>soporte@financeapp.com</span>
-          </div>
-        </CardContent>
-      </Card>
-      <style jsx>{`
-        @keyframes gradient-xy {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-gradient-xy {
-          background-size: 400% 400%;
-          animation: gradient-xy 15s ease infinite;
-        }
-      `}</style>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
