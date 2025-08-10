@@ -81,6 +81,20 @@ export function SplashScreen({ onLoadingComplete }: SplashScreenProps) {
   const [displayProgress, setDisplayProgress] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
 
+  // --- NUEVO EFECTO PARA BLOQUEAR SCROLL Y ZOOM ---
+  useEffect(() => {
+    // Guarda el valor original del overflow del body
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    // Bloquea el scroll en el body
+    document.body.style.overflow = 'hidden';
+
+    // Función de limpieza que se ejecuta cuando el componente se desmonta
+    return () => {
+      // Restaura el estilo original del overflow del body
+      document.body.style.overflow = originalStyle;
+    };
+  }, []); // El array vacío asegura que este efecto se ejecute solo una vez (al montar)
+
   // Efecto para la lógica principal de la barra de progreso.
   useEffect(() => {
     const timer = setInterval(() => {
@@ -146,7 +160,13 @@ export function SplashScreen({ onLoadingComplete }: SplashScreenProps) {
           }
         `}
       </style>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+      
+      {/* Esta etiqueta meta es crucial para deshabilitar el zoom en dispositivos móviles.
+        La he movido aquí para que sea más visible, aunque en una app Next.js/React
+        es mejor gestionarla con el componente Head o react-helmet.
+        He añadido 'maximum-scale=1' para mayor compatibilidad.
+      */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       
       {/* Contenedor principal con el fondo gradiente */}
       <div 
