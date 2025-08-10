@@ -42,8 +42,6 @@ export function MainApp() {
   }
 
   return (
-    // MODIFICACIÓN 1: Se ha quitado el fondo y se ha mantenido la estructura
-    // para que el header sea fijo y no haya scroll horizontal.
     <div className="flex h-screen overflow-x-hidden bg-transparent">
       {/* Custom Sidebar (implementación original del usuario) */}
       <CustomSidebar 
@@ -82,13 +80,12 @@ export function MainApp() {
                 onClick={() => setActiveSection("settings")}
               >
                   <div className="flex flex-col items-end">
-                      {/* MODIFICACIÓN 2: Se ha cambiado "Bienvenido!" por "Hola!" */}
                       <p className="font-normal text-sm text-gray-200">Hola!</p>
                       <p className="text-lg font-bold text-white">Julio Contreras</p>
                   </div>
-                  {/* MODIFICACIÓN 3: Foto de perfil actualizada. */}
+                  {/* MODIFICACIÓN FINAL: Foto de perfil de GitHub. */}
                   <img 
-                    src="https://i.imgur.com/O3b5a1c.jpeg" // URL de la nueva foto
+                    src="https://github.com/juliocontreras.png" // URL de la foto de perfil de GitHub
                     alt="Profile" 
                     className="h-11 w-11 rounded-full object-cover ring-2 ring-[#29c2a3]"
                   />
