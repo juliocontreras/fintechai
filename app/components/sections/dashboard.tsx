@@ -104,7 +104,7 @@ const EventTimeline = ({ events, data, timeRange }: { events: any[], data: any[]
 
 let lastDisplayedYear: number | null = null;
 
-export function Dashboard() {
+export default function Dashboard() {
   const [balance, setBalance] = useState(32440.00);
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(balance.toFixed(2));
@@ -231,38 +231,38 @@ export function Dashboard() {
 
         {/* Botones de acción */}
         <div className="grid grid-cols-4 gap-4 text-center mb-8">
-           <div className="flex flex-col items-center">
-            <button className="bg-[#1e5c70] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-              </svg>
-            </button>
-            <span className="mt-2 text-sm text-gray-400">Payment</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-            </button>
-            <span className="mt-2 text-sm text-gray-400">Receive</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
-              </svg>
-            </button>
-            <span className="mt-2 text-sm text-gray-400">Top Up</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </button>
-            <span className="mt-2 text-sm text-gray-400">Transfer</span>
-          </div>
+            <div className="flex flex-col items-center">
+              <button className="bg-[#1e5c70] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+              </button>
+              <span className="mt-2 text-sm text-gray-400">Payment</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+              <span className="mt-2 text-sm text-gray-400">Receive</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
+                </svg>
+              </button>
+              <span className="mt-2 text-sm text-gray-400">Top Up</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <button className="bg-[#20333b] text-white p-2 rounded-xl shadow-lg transition-colors duration-200 w-16 h-16 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </button>
+              <span className="mt-2 text-sm text-gray-400">Transfer</span>
+            </div>
         </div>
         
         {/* MODIFICACIÓN 1: Historial de Transacciones movido aquí */}
