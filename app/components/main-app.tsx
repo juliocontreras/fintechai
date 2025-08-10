@@ -86,9 +86,9 @@ export function MainApp() {
                       <p className="font-normal text-sm text-gray-200">Hola!</p>
                       <p className="text-lg font-bold text-white">Julio Contreras</p>
                   </div>
-                  {/* MODIFICACIÓN 3: Foto de perfil con tu cara, más grande y con borde. */}
+                  {/* MODIFICACIÓN 3: Foto de perfil actualizada. */}
                   <img 
-                    src="https://i.imgur.com/8b2dJ3E.jpeg" // URL de tu foto
+                    src="https://i.imgur.com/O3b5a1c.jpeg" // URL de la nueva foto
                     alt="Profile" 
                     className="h-11 w-11 rounded-full object-cover ring-2 ring-[#29c2a3]"
                   />
