@@ -28,14 +28,25 @@ export function Settings() {
     }
   }
 
-  // Clases de estilo para reutilizar
-  const cardClasses = "bg-slate-800 rounded-2xl shadow-lg border border-slate-700"
+  // --- Clases de Estilo Reutilizables ---
+  // Color exacto de la captura para las tarjetas
+  const cardClasses = "bg-[#223138] rounded-2xl shadow-xl border-none"
+  
+  // Estilo para labels y descripciones
   const labelClasses = "text-gray-300"
   const descriptionClasses = "text-gray-400"
-  const inputClasses = "bg-slate-900 border-slate-700 text-white placeholder:text-gray-500 rounded-md"
-  const selectTriggerClasses = "bg-slate-900 border-slate-700 text-white rounded-md"
+
+  // Estilo para inputs y selects (un tono más oscuro que la card)
+  const inputClasses = "bg-[#1a252a] border-slate-600 text-white placeholder:text-gray-500 rounded-md"
+  const selectTriggerClasses = "bg-[#1a252a] border-slate-600 text-white rounded-md"
+  
+  // Estilo de botón principal (color cian como el menú)
+  const buttonCyanClasses = "bg-cyan-400 hover:bg-cyan-500 text-black font-bold rounded-lg"
+  
+  // Estilo para el botón de eliminar (claro con texto rojo)
+  const buttonDeleteClasses = "bg-slate-200 hover:bg-slate-300 text-red-600 font-semibold rounded-lg"
+
   const separatorClasses = "bg-slate-700"
-  const buttonLightClasses = "bg-slate-200 hover:bg-slate-300 text-slate-900 font-semibold"
 
   return (
     <div className="space-y-8 p-4 md:p-8">
@@ -74,7 +85,7 @@ export function Settings() {
               <SelectTrigger className={selectTriggerClasses}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700 text-white">
+              <SelectContent className="bg-[#1a252a] border-slate-600 text-white">
                 <SelectItem value="usd">USD - Dólar Estadounidense</SelectItem>
                 <SelectItem value="eur">EUR - Euro</SelectItem>
                 <SelectItem value="mxn">MXN - Peso Mexicano</SelectItem>
@@ -82,7 +93,7 @@ export function Settings() {
               </SelectContent>
             </Select>
           </div>
-          <Button className={`${buttonLightClasses} w-full md:w-auto`}>Guardar Cambios</Button>
+          <Button className={`${buttonCyanClasses} w-full md:w-auto`}>Guardar Cambios</Button>
         </CardContent>
       </Card>
 
@@ -98,7 +109,9 @@ export function Settings() {
               <Label className={labelClasses}>Tema</Label>
               <p className="text-sm text-gray-400">Selecciona el tema de la aplicación</p>
             </div>
-            <ThemeToggle />
+            <div className={`${buttonCyanClasses} p-0 rounded-lg flex items-center justify-center`}>
+                 <ThemeToggle />
+            </div>
           </div>
           <Separator className={separatorClasses} />
           <div className="flex items-center justify-between">
@@ -110,7 +123,7 @@ export function Settings() {
               <SelectTrigger className={`w-[180px] ${selectTriggerClasses}`}>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-slate-800 border-slate-700 text-white">
+              <SelectContent className="bg-[#1a252a] border-slate-600 text-white">
                 <SelectItem value="dd/mm/yyyy">DD/MM/YYYY</SelectItem>
                 <SelectItem value="mm/dd/yyyy">MM/DD/YYYY</SelectItem>
                 <SelectItem value="yyyy-mm-dd">YYYY-MM-DD</SelectItem>
@@ -176,14 +189,14 @@ export function Settings() {
                 <Input type="password" placeholder="Nueva contraseña" className={inputClasses} />
                 <Input type="password" placeholder="Confirmar nueva contraseña" className={inputClasses} />
               </div>
-              <Button className={`${buttonLightClasses} w-full`}>Actualizar Contraseña</Button>
+              <Button className={`${buttonCyanClasses} w-full`}>Actualizar Contraseña</Button>
             </div>
             <Separator className={separatorClasses} />
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <Label className={labelClasses}>Autenticación de Dos Factores</Label>
               </div>
-              <Button className={buttonLightClasses}>Activar</Button>
+              <Button className={buttonCyanClasses}>Activar</Button>
             </div>
           </CardContent>
         </Card>
@@ -199,7 +212,7 @@ export function Settings() {
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <Label className={labelClasses}>Exportar Datos</Label>
-              <Button className={buttonLightClasses}>
+              <Button className={buttonCyanClasses}>
                 <Download className="h-4 w-4 mr-2" />
                 Exportar
               </Button>
@@ -207,7 +220,7 @@ export function Settings() {
             <Separator className={separatorClasses} />
             <div className="flex items-center justify-between">
               <Label className={labelClasses}>Cerrar Sesión</Label>
-              <Button className={buttonLightClasses} onClick={handleLogout} disabled={isLoggingOut}>
+              <Button className={buttonCyanClasses} onClick={handleLogout} disabled={isLoggingOut}>
                 <LogOut className="h-4 w-4 mr-2" />
                 {isLoggingOut ? "Cerrando..." : "Cerrar Sesión"}
               </Button>
@@ -215,7 +228,7 @@ export function Settings() {
             <Separator className={separatorClasses} />
             <div className="flex items-center justify-between">
               <Label className={`${labelClasses} text-red-500`}>Eliminar Cuenta</Label>
-              <Button variant="destructive">
+              <Button className={buttonDeleteClasses}>
                 <Trash2 className="h-4 w-4 mr-2" />
                 Eliminar
               </Button>
