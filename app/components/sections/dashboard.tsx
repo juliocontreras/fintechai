@@ -196,8 +196,6 @@ export function Dashboard() {
   }
 
   return (
-    // MODIFICACIÓN: Se ha añadido `overflow-x-hidden` al contenedor principal del Dashboard.
-    // Esto evita que cualquier elemento hijo cause un desbordamiento horizontal en la página.
     <div className="flex justify-center text-white p-4 overflow-x-hidden">
       <div className="space-y-6 w-full md:mx-auto">
         {/* Sección de Saldo */}
@@ -266,9 +264,49 @@ export function Dashboard() {
             <span className="mt-2 text-sm text-gray-400">Transfer</span>
           </div>
         </div>
+        
+        {/* MODIFICACIÓN 1: Historial de Transacciones movido aquí */}
+        <div className="space-y-4">
+          <div className="flex justify-between items-center text-gray-400">
+            <span className="font-semibold text-gray-200">Transaction History</span>
+            <a href="#" className="text-sm text-cyan-300 hover:underline">See All</a>
+          </div>
+          <div className="bg-[#20333b] p-4 rounded-xl flex justify-between items-center">
+            <div className="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+              <div className="ml-3">
+                <p className="font-semibold text-gray-200">Bank Account</p>
+                <p className="text-sm text-gray-400">4322 **** **** 8900</p>
+              </div>
+            </div>
+            <button className="text-gray-400 hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+          <div className="bg-[#20333b] p-4 rounded-xl flex justify-between items-center">
+            <div className="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 .895-2 2-2zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div className="ml-3">
+                <p className="font-semibold text-gray-200">VISA</p>
+                <p className="text-sm text-gray-400">5567 **** **** 8910</p>
+              </div>
+            </div>
+            <button className="text-gray-400 hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-        {/* Tarjeta de Historial de Patrimonio */}
-        <div className="bg-[#20333b] p-4 rounded-xl">
+        {/* MODIFICACIÓN 2: Se ha añadido un margen inferior (mb-8) a esta tarjeta */}
+        <div className="bg-[#20333b] p-4 rounded-xl mb-8">
             <div className="flex justify-between items-center mb-4">
                 <h3 className="font-semibold text-gray-200">Historial y Proyecciones</h3>
                 <div className="flex flex-wrap gap-2 text-xs">
@@ -321,47 +359,6 @@ export function Dashboard() {
                 </ResponsiveContainer>
             </div>
             <EventTimeline events={eventData} data={displayData} timeRange={timeRange} />
-        </div>
-
-
-        {/* Historial de Transacciones */}
-        <div className="space-y-4">
-          <div className="flex justify-between items-center text-gray-400">
-            <span className="font-semibold text-gray-200">Transaction History</span>
-            <a href="#" className="text-sm text-cyan-300 hover:underline">See All</a>
-          </div>
-          <div className="bg-[#20333b] p-4 rounded-xl flex justify-between items-center">
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-              </svg>
-              <div className="ml-3">
-                <p className="font-semibold text-gray-200">Bank Account</p>
-                <p className="text-sm text-gray-400">4322 **** **** 8900</p>
-              </div>
-            </div>
-            <button className="text-gray-400 hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-          <div className="bg-[#20333b] p-4 rounded-xl flex justify-between items-center">
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 .895-2 2-2zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div className="ml-3">
-                <p className="font-semibold text-gray-200">VISA</p>
-                <p className="text-sm text-gray-400">5567 **** **** 8910</p>
-              </div>
-            </div>
-            <button className="text-gray-400 hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
     </div>
