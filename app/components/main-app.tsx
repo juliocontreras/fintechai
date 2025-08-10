@@ -2,18 +2,15 @@
 
 import { useState } from "react"
 // Se han restaurado los imports originales
-import { Bell, User, LogOut } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Dashboard } from "./sections/dashboard"
 import { Transactions } from "./sections/transactions"
-import { Investments } from "./sections/investments"
 import { Budgets } from "./sections/budgets"
 import { Settings } from "./sections/settings"
 import { BottomNavigation } from "./bottom-navigation"
 import { CustomSidebar } from "./custom-sidebar"
 import { useAuth } from "./auth-provider"
+import { Investments } from "./sections/investments"
 
 export function MainApp() {
   const [activeSection, setActiveSection] = useState("dashboard")
