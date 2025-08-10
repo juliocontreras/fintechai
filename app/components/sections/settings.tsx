@@ -1,10 +1,11 @@
 "use client"
 
-// Archivo completo con fix Opción B (CSS global para Radix Popper)
-// Mantienes tu ThemeToggle tal cual; forzamos el fondo del dropdown
-// con un selector global correcto para Radix: [data-radix-popper-content-wrapper] > *
+// Archivo completo con fix Opción A para el menú del ThemeToggle (Radix DropdownMenu)
+// - Dropdown con fondo oscuro, borde y texto blanco
+// - Sin dependencia de CSS global para este caso
 
 import { useState } from "react";
+import { useTheme } from "next-themes";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,10 +13,53 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { ThemeToggle } from "@/components/theme-toggle"; // tu componente existente
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-import { User, Bell, Shield, CreditCard, Download, Trash2, LogOut, ChevronDown } from "lucide-react";
+import { User, Bell, Shield, CreditCard, Download, Trash2, LogOut, ChevronDown, Laptop, Moon, Sun } from "lucide-react";
 import { useAuth } from "../auth-provider";
+
+// ------------------------------------------------------------------
+// ThemeToggle (Opción A): DropdownMenu con estilos forzados
+// ------------------------------------------------------------------
+export function ThemeToggle() {
+  const { setTheme, theme } = useTheme();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          className="bg-[#1a252a] border-slate-600 text-white hover:bg-[#223138]"
+          aria-label="Cambiar tema"
+        >
+          {theme === "dark" ? (
+            <Moon className="h-4 w-4" />
+          ) : theme === "light" ? (
+            <Sun className="h-4 w-4" />
+          ) : (
+            <Laptop className="h-4 w-4" />
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+
+      {/* Fondo, borde y texto forzados en el contenido del menú */}
+      <DropdownMenuContent
+        align="end"
+        sideOffset={8}
+        className="z-[60] w-40 bg-[#1a252a] text-white border border-slate-600 shadow-xl rounded-md"
+      >
+        <DropdownMenuItem className="focus:bg-slate-700/70" onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+        <DropdownMenuItem className="focus:bg-slate-700/70" onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+        <DropdownMenuItem className="focus:bg-slate-700/70" onClick={() => setTheme("system")}>System</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 // ------------------------------------------------------------------
 // Componente de Tarjeta Plegable
@@ -157,7 +201,7 @@ export function Settings() {
               <Label className={labelClasses}>Tema</Label>
               <p className="text-sm text-gray-400">Selecciona el tema de la aplicación</p>
             </div>
-            {/* Mantienes tu ThemeToggle. El fix viene del CSS global de abajo */}
+            {/* ThemeToggle con menú estilizado (Opción A) */}
             <ThemeToggle />
           </div>
           <Separator className={separatorClasses} />
@@ -237,7 +281,7 @@ export function Settings() {
           <Separator className={separatorClasses} />
           <div className="flex items-center justify-between">
             <Label className={`${labelClasses} text-red-500`}>Eliminar Cuenta</Label>
-            <Button className={buttonDeleteDarkClasses}>
+            <Button className={"bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg"}>
               <Trash2 className="h-4 w-4 mr-2" />
               Eliminar
             </Button>
@@ -250,34 +294,12 @@ export function Settings() {
           from { opacity: 0; transform: translateY(-10px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
-
-        /* ------------------ FIX Opción B ------------------
-           Forzar fondo/borde/texto en poppers de Radix (DropdownMenu, etc.)
-           Esto corrige el menú Light/Dark/System del ThemeToggle.
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out forwards;
+        }
+        /* Quitamos el selector global incorrecto para Radix (
+           si lo necesitas para otros menús, usa la opción B en global.css)
         */
-        [data-radix-popper-content-wrapper] > *,
-        [data-radix-popper-content] {
-          background-color: #1a252a !important;  /* gris oscuro tipo placeholder */
-          border: 1px solid #4a5568 !important;  /* borde gris */
-          color: #ffffff !important;             /* texto blanco */
-          box-shadow: 0 10px 30px rgba(0,0,0,.4) !important;
-          border-radius: 8px !important;
-          z-index: 60 !important;
-          backdrop-filter: none !important;      /* evita transparencias */
-        }
-        /* estados hover/focus para items del menú */
-        [data-radix-popper-content-wrapper] [role="menuitem"],
-        [data-radix-popper-content] [role="menuitem"] { background: transparent !important; }
-        [data-radix-popper-content-wrapper] [role="menuitem"]:hover,
-        [data-radix-popper-content] [role="menuitem"]:hover,
-        [data-radix-popper-content-wrapper] [role="menuitem"][data-highlighted],
-        [data-radix-popper-content] [role="menuitem"][data-highlighted] {
-          background-color: rgba(71,85,105,0.7) !important; /* slate-600/70 */
-        }
-
-        /* (Opcional) Alinear tokens de shadcn para popover si se usan */
-        :root { --popover: 203 20% 16%; --popover-foreground: 0 0% 100%; }
       `}</style>
     </div>
   );
