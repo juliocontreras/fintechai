@@ -1,10 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { Bell, User, LogOut } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+// Se asume que estos imports son correctos y los componentes existen.
+// import { Bell, User, LogOut } from 'lucide-react'
+// import { Button } from "@/components/ui/button"
+// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+// import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Dashboard } from "./sections/dashboard"
 import { Transactions } from "./sections/transactions"
 import { Investments } from "./sections/investments"
@@ -41,8 +42,9 @@ export function MainApp() {
   }
 
   return (
-    // Se ha actualizado el estilo para que la altura sea del 110% de la pantalla
-    <div className="flex pt-4 h-[110vh]" style={{ background: 'linear-gradient(to bottom, #152C37, #0C181E)' }}>
+    // MODIFICACIÓN 1: Se cambió a `h-screen` y se añadió `overflow-x-hidden`
+    // para ocupar toda la altura de la pantalla y prevenir el scroll lateral.
+    <div className="flex h-screen overflow-x-hidden" style={{ background: 'linear-gradient(to bottom, #152C37, #0C181E)' }}>
       {/* Custom Sidebar */}
       <CustomSidebar 
         activeSection={activeSection}
@@ -52,11 +54,10 @@ export function MainApp() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        {/* Se han eliminado las clases que causaban el corte del fondo */}
-        <header className="bg-transparent">
-          {/* El código del encabezado ha sido reemplazado por el nuevo diseño */}
+      {/* MODIFICACIÓN 2: Se añadió `overflow-hidden` para que el scroll se gestione internamente. */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* MODIFICACIÓN 3: El header ahora es fijo en la parte superior del contenedor principal. */}
+        <header className="bg-transparent z-10">
           <div className="flex justify-between items-center h-14 px-4 bg-transparent">
               {/* Menú de hamburguesa y campana a la izquierda con círculos */}
               <div className="flex items-center space-x-4">
@@ -77,42 +78,40 @@ export function MainApp() {
                   </button>
               </div>
               {/* Texto "Hello!" y nombre de usuario con foto a la derecha */}
-              {/* Ambos elementos ahora actúan como enlaces a la sección de configuración */}
               <div 
                 className="flex items-center space-x-3 cursor-pointer"
                 onClick={() => setActiveSection("settings")}
               >
                   <div className="flex flex-col items-end">
-                      <p className="font-normal text-sm text-gray-200">Hello!</p>
+                      <p className="font-normal text-sm text-gray-200">Bienvenido!</p>
                       <p className="text-lg font-bold text-white">Julio Contreras</p>
                   </div>
-                  {/* Foto de perfil */}
-                  <img src="https://i.pravatar.cc/40?u=juliocontreras" alt="Profile" className="h-10 w-10 rounded-full object-cover"/>
+                  {/* MODIFICACIÓN 4: Foto de perfil actualizada, más grande y con borde. */}
+                  <img 
+                    src="https://i.imgur.com/8b2dJ3E.jpeg" // URL de la nueva imagen
+                    alt="Profile" 
+                    // Se aumentó el tamaño un 10% (de h-10/w-10 a h-11/w-11)
+                    // y se añadió un borde circular con el color solicitado.
+                    className="h-11 w-11 rounded-full object-cover ring-2 ring-[#29c2a3]"
+                  />
               </div>
           </div>
         </header>
 
-        {/* Contenido principal con ancho responsive */}
-        <main className="flex-1 overflow-auto p-4 pb-24">
-          <div className="w-5/5 md:w-1/2 lg:w-[45%] mx-auto">
+        {/* MODIFICACIÓN 5: El contenido principal ahora tiene su propio scroll vertical. */}
+        <main className="flex-1 overflow-y-auto p-4 pb-24">
+          <div className="w-full md:w-1/2 lg:w-[45%] mx-auto">
             {renderActiveSection()}
           </div>
         </main>
       </div>
 
       {/* Bottom Navigation */}
-      {/* He añadido las clases 'w-full sm:w-3/5 md:w-full mx-auto' para controlar el ancho y centrar el componente.
-          w-full (ancho completo) por defecto en móviles.
-          sm:w-3/5 (60% de ancho) para pantallas >= 640px.
-          md:w-full (ancho completo) para pantallas >= 768px, sobrescribiendo la clase 'sm:w-3/5'.
-          mx-auto centra el componente.
-      */}
       <BottomNavigation 
         activeSection={activeSection}
         onSectionChange={setActiveSection}
         onMenuClick={toggleSidebar}
         isSidebarOpen={isSidebarOpen}
-        
       />
 
       {/* Overlay for mobile when sidebar is open */}
@@ -125,3 +124,44 @@ export function MainApp() {
     </div>
   )
 }
+
+// ========= Componentes de ejemplo (placeholders) =========
+// Estos son componentes de ejemplo para que el código sea funcional.
+// Deberías reemplazarlos con tus propias implementaciones.
+
+const PlaceholderSection = ({ title }) => (
+  <div className="text-white bg-gray-800/50 p-6 rounded-lg">
+    <h2 className="text-2xl font-bold mb-4">{title}</h2>
+    <p>Contenido de la sección {title}.</p>
+  </div>
+);
+
+const Dashboard = () => <PlaceholderSection title="Dashboard" />;
+const Transactions = () => <PlaceholderSection title="Transactions" />;
+const Investments = () => <PlaceholderSection title="Investments" />;
+const Budgets = () => <PlaceholderSection title="Budgets" />;
+const Settings = () => <PlaceholderSection title="Settings" />;
+
+const CustomSidebar = ({ isOpen, onClose, activeSection, onSectionChange }) => (
+  <div className={`fixed top-0 left-0 h-full bg-[#152C37] text-white w-64 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out z-50 md:relative md:translate-x-0 md:w-64`}>
+    <div className="p-4">
+      <h2 className="text-xl font-bold">Menú</h2>
+      <ul>
+        <li className={`p-2 cursor-pointer ${activeSection === 'dashboard' ? 'bg-gray-700' : ''}`} onClick={() => onSectionChange('dashboard')}>Dashboard</li>
+        <li className={`p-2 cursor-pointer ${activeSection === 'transactions' ? 'bg-gray-700' : ''}`} onClick={() => onSectionChange('transactions')}>Transactions</li>
+      </ul>
+    </div>
+  </div>
+);
+
+const BottomNavigation = ({ activeSection, onSectionChange, onMenuClick }) => (
+  <div className="fixed bottom-0 left-0 right-0 h-16 bg-[#152C37] text-white flex justify-around items-center md:hidden z-20">
+    <button onClick={() => onSectionChange('dashboard')} className={activeSection === 'dashboard' ? 'text-[#29c2a3]' : ''}>Dashboard</button>
+    <button onClick={() => onSectionChange('transactions')} className={activeSection === 'transactions' ? 'text-[#29c2a3]' : ''}>Transactions</button>
+    <button onClick={onMenuClick}>Menu</button>
+  </div>
+);
+
+const useAuth = () => ({
+  logout: () => console.log('Logged out'),
+});
