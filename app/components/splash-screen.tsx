@@ -81,19 +81,30 @@ export function SplashScreen({ onLoadingComplete }: SplashScreenProps) {
   const [displayProgress, setDisplayProgress] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
 
-  // --- NUEVO EFECTO PARA BLOQUEAR SCROLL Y ZOOM ---
+  // --- EFECTO MEJORADO PARA BLOQUEO TOTAL DE SCROLL Y ZOOM ---
   useEffect(() => {
-    // Guarda el valor original del overflow del body
-    const originalStyle = window.getComputedStyle(document.body).overflow;
-    // Bloquea el scroll en el body
+    // Guardar estilos originales
+    const originalHtmlStyle = document.documentElement.style.overflow;
+    const originalBodyStyle = document.body.style.overflow;
+
+    // Aplicar bloqueo de scroll
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
+
+    // Prevenir el efecto de "rebote" en móviles (overscroll)
+    const preventBounce = (e: TouchEvent) => e.preventDefault();
+    // Es importante { passive: false } para que preventDefault funcione en eventos táctiles
+    document.addEventListener('touchmove', preventBounce, { passive: false });
 
     // Función de limpieza que se ejecuta cuando el componente se desmonta
     return () => {
-      // Restaura el estilo original del overflow del body
-      document.body.style.overflow = originalStyle;
+      // Restaurar estilos originales
+      document.documentElement.style.overflow = originalHtmlStyle;
+      document.body.style.overflow = originalBodyStyle;
+      // Eliminar el listener de eventos
+      document.removeEventListener('touchmove', preventBounce);
     };
-  }, []); // El array vacío asegura que este efecto se ejecute solo una vez (al montar)
+  }, []); // El array vacío asegura que este efecto se ejecute solo una vez
 
   // Efecto para la lógica principal de la barra de progreso.
   useEffect(() => {
@@ -161,23 +172,17 @@ export function SplashScreen({ onLoadingComplete }: SplashScreenProps) {
         `}
       </style>
       
-      {/* Esta etiqueta meta es crucial para deshabilitar el zoom en dispositivos móviles.
-        La he movido aquí para que sea más visible, aunque en una app Next.js/React
-        es mejor gestionarla con el componente Head o react-helmet.
-        He añadido 'maximum-scale=1' para mayor compatibilidad.
-      */}
+      {/* Esta etiqueta meta sigue siendo importante */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       
-      {/* Contenedor principal con el fondo gradiente */}
+      {/* Contenedor principal con posicionamiento FIJO para bloquearlo en la pantalla */}
       <div 
-        className={`min-h-screen text-white flex flex-col items-center justify-center p-4 font-sans relative overflow-hidden ${isLoaded ? 'cursor-pointer' : ''}`}
+        className={`fixed inset-0 z-50 w-full h-full text-white flex flex-col items-center justify-center p-4 font-sans overflow-hidden ${isLoaded ? 'cursor-pointer' : ''}`}
         style={{ background: "linear-gradient(to bottom, #152C37, #0C181E)" }}
         onClick={handleScreenClick}
       >
-        {/* El overlay se ha eliminado para mostrar el gradiente directamente */}
-
         {/* Contenido centrado */}
-        <div className="flex flex-col items-center justify-center space-y-4 -translate-y-1/4 relative z-10">
+        <div className="flex flex-col items-center justify-center space-y-4 -translate-y-1/4">
           
           {/* Logo Animado */}
           <div className="animate-pulse">
