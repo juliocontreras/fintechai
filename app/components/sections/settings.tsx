@@ -29,12 +29,13 @@ export function Settings() {
   }
 
   // Clases de estilo para reutilizar
-  const cardClasses = "bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-700/50"
+  const cardClasses = "bg-slate-800 rounded-2xl shadow-lg border border-slate-700"
   const labelClasses = "text-gray-300"
   const descriptionClasses = "text-gray-400"
-  const inputClasses = "bg-slate-900/70 border-slate-700 text-white placeholder:text-gray-500 rounded-md"
-  const selectTriggerClasses = "bg-slate-900/70 border-slate-700 text-white rounded-md"
+  const inputClasses = "bg-slate-900 border-slate-700 text-white placeholder:text-gray-500 rounded-md"
+  const selectTriggerClasses = "bg-slate-900 border-slate-700 text-white rounded-md"
   const separatorClasses = "bg-slate-700"
+  const buttonLightClasses = "bg-slate-200 hover:bg-slate-300 text-slate-900 font-semibold"
 
   return (
     <div className="space-y-8 p-4 md:p-8">
@@ -81,7 +82,7 @@ export function Settings() {
               </SelectContent>
             </Select>
           </div>
-          <Button className="w-full md:w-auto">Guardar Cambios</Button>
+          <Button className={`${buttonLightClasses} w-full md:w-auto`}>Guardar Cambios</Button>
         </CardContent>
       </Card>
 
@@ -175,14 +176,14 @@ export function Settings() {
                 <Input type="password" placeholder="Nueva contraseña" className={inputClasses} />
                 <Input type="password" placeholder="Confirmar nueva contraseña" className={inputClasses} />
               </div>
-              <Button variant="outline" className="w-full">Actualizar Contraseña</Button>
+              <Button className={`${buttonLightClasses} w-full`}>Actualizar Contraseña</Button>
             </div>
             <Separator className={separatorClasses} />
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <Label className={labelClasses}>Autenticación de Dos Factores</Label>
               </div>
-              <Button variant="outline">Activar</Button>
+              <Button className={buttonLightClasses}>Activar</Button>
             </div>
           </CardContent>
         </Card>
@@ -198,7 +199,7 @@ export function Settings() {
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <Label className={labelClasses}>Exportar Datos</Label>
-              <Button variant="outline">
+              <Button className={buttonLightClasses}>
                 <Download className="h-4 w-4 mr-2" />
                 Exportar
               </Button>
@@ -206,7 +207,7 @@ export function Settings() {
             <Separator className={separatorClasses} />
             <div className="flex items-center justify-between">
               <Label className={labelClasses}>Cerrar Sesión</Label>
-              <Button variant="secondary" onClick={handleLogout} disabled={isLoggingOut}>
+              <Button className={buttonLightClasses} onClick={handleLogout} disabled={isLoggingOut}>
                 <LogOut className="h-4 w-4 mr-2" />
                 {isLoggingOut ? "Cerrando..." : "Cerrar Sesión"}
               </Button>
